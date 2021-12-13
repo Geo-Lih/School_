@@ -18,6 +18,7 @@ def get_students(request):
         'first_name': student.first_name,
         'last_name': student.last_name,
         'age': student.age
+
        }
        for student in Student.objects.all()
     ]
@@ -47,7 +48,7 @@ def generate_students(request):
 
     fake = Faker()
     gen_students = {
-                 'count': request.GET.get('count')
+        'count': request.GET.get('count')
     }
 
     try:
@@ -59,9 +60,9 @@ def generate_students(request):
     student_list = []
     for _ in range(gen):
         data = {
-             'first_name': fake.first_name(),
-             'last_name': fake.last_name(),
-             'age': random.randint(1, 92),
+            'first_name': fake.first_name(),
+            'last_name': fake.last_name(),
+            'age': random.randint(1, 92),
         }
         student_list.append(data)
         student = Student(**data)
