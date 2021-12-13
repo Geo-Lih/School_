@@ -22,6 +22,6 @@ class Command(BaseCommand):
             )
             for _ in range(count)
 
-         ]
+            ]
         Teacher.objects.bulk_create(teachers)
         print('it works')
