@@ -1,5 +1,5 @@
 from django.db import models
-
+# flake8: noqa
 
 class Teacher(models.Model):
     id = models.BigAutoField
