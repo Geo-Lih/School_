@@ -36,7 +36,7 @@ def create_students(request):
         data = {
             'first_name': fake.first_name(),
             'last_name': fake.last_name(),
-            'age': random.randint(18, 55),
+            'age': random.randint(5, 18),
         }
 
         form = StudentForm(initial=data)
@@ -53,28 +53,3 @@ def create_students(request):
 
     return HttpResponse(str(form.errors), status=400)
 
-
-def generate_students(request):
-
-    faker = Faker()
-    gen_students = {
-        'count': request.GET.get('count')
-    }
-
-    try:
-        gen = int(gen_students['count'])
-        if 100 < gen or gen < 0:
-            raise ValueError
-    except KeyError:
-        pass
-    teachers = [
-        Student(
-            first_name=faker.first_name(),
-            last_name=faker.last_name(),
-            age=random.randint(20, 55)
-        )
-        for _ in range(gen)
-
-    ]
-    Student.objects.bulk_create(teachers)
-    return HttpResponse(f'{gen} students were generated')

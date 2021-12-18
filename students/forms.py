@@ -8,8 +8,10 @@ class StudentForm(forms.ModelForm):
     def clean(self):
         age = self.cleaned_data['age']
 
-        if age < 17:
+        if age < 5:
             self.add_error('age', 'Too small age for being a student')
+        if age > 18:
+            self.add_error('age', 'Too old for being a student')
 
     class Meta:
         model = Student

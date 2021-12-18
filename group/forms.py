@@ -10,6 +10,8 @@ class GroupForm(forms.ModelForm):
 
         if group_size < 6:
             self.add_error('group_size', 'Too small size of group')
+        if group_size > 20:
+            self.add_error('group_size', 'Too large size of group')
 
     class Meta:
         model = Group
