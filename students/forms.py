@@ -18,5 +18,3 @@ class StudentForm(forms.ModelForm):
             'last_name',
             'age',
         )
-
-

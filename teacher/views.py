@@ -1,7 +1,7 @@
 import random
 
 from django.forms import model_to_dict
-from django.http import HttpResponse, JsonResponse, Http404, HttpResponseRedirect
+from django.http import Http404, HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 from django.urls import reverse
 from django.views.decorators.http import require_http_methods
@@ -14,7 +14,8 @@ from teacher.models import Teacher
 
 def get_teachers(request):
     queryset = Teacher.objects.all()
-    return render(request, 'marker.html', context={'teachers': queryset})
+    return render(request, 'marker.html',
+                  context={'teachers': queryset})
 
 
 def get_teacher(request, teacher_id):
@@ -40,7 +41,8 @@ def create_teachers(request):
 
         form = TeacherForm(initial=data)
 
-        return render(request, 'create-teacher.html', context={'form': form})
+        return render(request, 'create-teacher.html',
+                      context={'form': form})
 
     form = TeacherForm(request.POST)
 

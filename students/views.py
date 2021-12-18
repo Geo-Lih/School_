@@ -1,7 +1,7 @@
 import random
 
 from django.forms import model_to_dict
-from django.http import HttpResponse, JsonResponse, Http404, HttpResponseRedirect
+from django.http import Http404, HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 from django.urls import reverse
 from django.views.decorators.http import require_http_methods
@@ -14,7 +14,8 @@ from students.models import Student
 
 def get_students(request):
     queryset = Student.objects.all()
-    return render(request, 'index.html', context={'students': queryset})
+    return render(request, 'index.html',
+                  context={'students': queryset})
 
 
 def get_student(request, student_id):
@@ -40,7 +41,8 @@ def create_students(request):
 
         form = StudentForm(initial=data)
 
-        return render(request, 'create-student.html', context={'form': form})
+        return render(request, 'create-student.html',
+                      context={'form': form})
 
     form = StudentForm(request.POST)
 
@@ -76,4 +78,3 @@ def generate_students(request):
     ]
     Student.objects.bulk_create(teachers)
     return HttpResponse(f'{gen} students were generated')
-

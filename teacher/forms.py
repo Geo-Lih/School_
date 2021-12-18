@@ -18,5 +18,3 @@ class TeacherForm(forms.ModelForm):
             'last_name',
             'age',
         )
-
-

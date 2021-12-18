@@ -1,7 +1,7 @@
 import random
 
 from django.forms import model_to_dict
-from django.http import HttpResponse, JsonResponse, Http404, HttpResponseRedirect
+from django.http import Http404, HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 from django.urls import reverse
 from django.views.decorators.http import require_http_methods
@@ -14,7 +14,8 @@ from group.models import Group
 
 def get_groups(request):
     queryset = Group.objects.all()
-    return render(request, 'start.html', context={'groups': queryset})
+    return render(request, 'start.html',
+                  context={'groups': queryset})
 
 
 def get_group(request, group_id):
@@ -40,7 +41,8 @@ def create_groups(request):
 
         form = GroupForm(initial=data)
 
-        return render(request, 'create-group.html', context={'form': form})
+        return render(request, 'create-group.html',
+                      context={'form': form})
 
     form = GroupForm(request.POST)
 
