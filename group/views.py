@@ -52,4 +52,3 @@ def create_groups(request):
         return HttpResponseRedirect(reverse('group-list'))
 
     return HttpResponse(str(form.errors), status=400)
-
