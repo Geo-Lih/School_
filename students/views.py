@@ -52,4 +52,3 @@ def create_students(request):
         return HttpResponseRedirect(reverse('students-list'))
 
     return HttpResponse(str(form.errors), status=400)
-
