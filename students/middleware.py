@@ -19,5 +19,6 @@ class LogMiddleware:
 
         if '/admin/' in path:
             Logger.objects.create(method=method, path=path, execution_time=estimation)
+            print('Works')
 
-        return
+        return response

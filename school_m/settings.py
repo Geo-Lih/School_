@@ -52,7 +52,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
-    # 'students.middleware.LogMiddleware',
+    'students.middleware.LogMiddleware',
 ]
 
 ROOT_URLCONF = 'school_m.urls'
