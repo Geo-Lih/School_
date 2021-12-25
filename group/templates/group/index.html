@@ -8,7 +8,7 @@
 
 <h1>Look at our groups<3</h1>
 
-<a href="{% url 'create-group' %}">Create Group</a>
+<a href="{% url 'group:create' %}">Create Group</a>
 
 <h3>Group list</h3>
 
@@ -16,7 +16,7 @@
     {% for group in groups %}
 
         <li>
-            <a href="{% url 'group-detail' group_id=group.pk %}">{{ forloop.counter }}. {{ group.full_name }}</a>
+            <a href="{% url 'group:edit' group_id=group.pk %}">{{ forloop.counter }}. {{ group.full_name }}</a>
         </li>
 
     {% endfor %}

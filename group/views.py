@@ -1,8 +1,7 @@
 import random
 
-from django.forms import model_to_dict
-from django.http import Http404, HttpResponse, HttpResponseRedirect, JsonResponse
-from django.shortcuts import render
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.views.decorators.http import require_http_methods
 
@@ -14,17 +13,37 @@ from group.models import Group
 
 def get_groups(request):
     queryset = Group.objects.all()
-    return render(request, 'start.html',
+    return render(request, 'group/index.html',
                   context={'groups': queryset})
 
 
-def get_group(request, group_id):
-    try:
-        group = Group.objects.get(pk=group_id)
-        response = model_to_dict(group)
-    except Group.DoesNotExist:
-        raise Http404
-    return JsonResponse(response)
+def edit_group(request, group_id):
+    group = get_object_or_404(Group, pk=group_id)
+    if request.method == 'GET':
+        form = GroupForm(instance=group)
+
+        return render(request, 'group/edit.html', context={'form': form})
+
+    if request.method == 'POST':
+        form = GroupForm(request.POST, instance=group)
+        if form.is_valid():
+            form.save()
+            return redirect(reverse('group:list'))
+
+        return render(request, 'group/edit.html', context={'form': form})
+
+    return HttpResponse(status=405)
+
+
+@require_http_methods(['GET', 'POST'])
+def delete_group(request, group_id):
+    group = get_object_or_404(Group, pk=group_id)
+
+    if request.method == 'POST':
+        group.delete()
+        return HttpResponseRedirect(reverse('group:list'))
+
+    return render(request, 'group/edit.html')
 
 
 @require_http_methods(['GET', 'POST'])
@@ -41,7 +60,7 @@ def create_groups(request):
 
         form = GroupForm(initial=data)
 
-        return render(request, 'create-group.html',
+        return render(request, 'group/create.html',
                       context={'form': form})
 
     form = GroupForm(request.POST)
@@ -49,6 +68,6 @@ def create_groups(request):
     if form.is_valid():
         form.save()
 
-        return HttpResponseRedirect(reverse('group-list'))
+        return HttpResponseRedirect(reverse('group:list'))
 
     return HttpResponse(str(form.errors), status=400)

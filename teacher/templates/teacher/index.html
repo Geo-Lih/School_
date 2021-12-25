@@ -8,7 +8,7 @@
 
 <h1>Look at our teachers<3</h1>
 
-<a href="{% url 'create-teacher' %}">Create Teacher</a>
+<a href="{% url 'teacher:create' %}">Create Teacher</a>
 
 <h3>Teacher list</h3>
 
@@ -16,7 +16,7 @@
     {% for teacher in teachers %}
 
         <li>
-            <a href="{% url 'teacher-detail' teacher_id=teacher.pk %}">{{ forloop.counter }}. {{ teacher.full_name }}</a>
+            <a href="{% url 'teacher:edit' teacher_id=teacher.pk %}">{{ forloop.counter }}. {{ teacher.full_name }}</a>
         </li>
 
     {% endfor %}
