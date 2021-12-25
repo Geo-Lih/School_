@@ -1,5 +1,6 @@
 from django.db import models
 # flake8: noqa
+from students.validator import validate_phone
 
 
 class Teacher(models.Model):
@@ -7,6 +8,10 @@ class Teacher(models.Model):
     first_name = models.CharField(max_length=64)
     last_name = models.CharField(max_length=64)
     age = models.IntegerField()
+    phone = models.CharField(
+        max_length=13,
+        validators=[validate_phone]
+    )
 
     @property
     def full_name(self):
