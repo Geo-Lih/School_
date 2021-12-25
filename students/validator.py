@@ -14,4 +14,3 @@ def validate_phone(number):
 
     if number[3:6] not in operators_list:
         raise ValidationError(f'{number} operator cod  is not correct ')
-

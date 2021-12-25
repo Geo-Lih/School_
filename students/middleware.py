@@ -1,3 +1,4 @@
+# flake8: noqa
 import time
 
 from students.models import Logger

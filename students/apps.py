@@ -1,4 +1,5 @@
 from django.apps import AppConfig
+# flake8: noqa
 
 
 class StudentsConfig(AppConfig):
@@ -7,4 +8,3 @@ class StudentsConfig(AppConfig):
 
     def ready(self):
         from students import signals
-
