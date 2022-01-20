@@ -14,6 +14,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+from celery.schedules import crontab
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -41,6 +43,7 @@ INSTALLED_APPS = [
     'students',
     'teacher',
     'group',
+    'django_celery_results',
 ]
 
 MIDDLEWARE = [
@@ -130,3 +133,22 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+CELERY_BROKER_URL = 'amqp://localhost'
+CELERY_RESULT_BACKEND = 'django.db'
+
+CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
+
+CELERY_BEAT_SCHEDULE = {
+    'del_old_log del 7 days': {
+        'task': 'teachers.tasks.del_old_log',
+        'schedule': crontab(
+            minute='30',
+            hour='00',
+            day_of_week='*',
+            day_of_month='*',
+            month_of_year='*'
+        ),
+    },
+}

@@ -1,9 +1,11 @@
 from django.db import models
 # flake8: noqa
 from students.validator import validate_phone
+from teacher.models import Teacher
 
 
 class Student(models.Model):
+    teachers = models.ManyToManyField(Teacher)
     id = models.BigAutoField
     first_name = models.CharField(max_length=64)
     last_name = models.CharField(max_length=64)
@@ -26,3 +28,12 @@ class Logger(models.Model):
     path = models.URLField(max_length=666)
     execution_time = models.FloatField(max_length=12)
     created = models.DateTimeField(auto_now_add=True)
+
+
+class Contact(models.Model):
+    name = models.CharField(max_length=255)
+    email = models.EmailField()
+    message = models.TextField(max_length=500)
+
+    def __str__(self):
+        return self.email

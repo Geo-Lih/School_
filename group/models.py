@@ -1,8 +1,12 @@
 from django.db import models
 # flake8: noqa
+from students.models import Student
+from teacher.models import Teacher
 
 
 class Group(models.Model):
+    student = models.ForeignKey(Student, on_delete=models.CASCADE, null=True)
+    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, null=True)
     id = models.BigAutoField
     group_name = models.CharField(max_length=64)
     group_direction = models.CharField(max_length=64)
