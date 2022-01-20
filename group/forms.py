@@ -1,3 +1,4 @@
+# flake8: noqa
 from django import forms
 
 from group.models import Group
