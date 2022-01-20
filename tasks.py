@@ -21,4 +21,3 @@ def print_me(a, b):
     time.sleep(5)
 
     return "My result"
-

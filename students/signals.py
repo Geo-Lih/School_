@@ -1,9 +1,9 @@
 from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 
+from students.models import Contact
 from students.models import Student
 
-from students.models import Contact
 from .tasks import send_email
 
 

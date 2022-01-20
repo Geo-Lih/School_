@@ -1,8 +1,7 @@
 from django import forms
 
-from students.models import Student
-
 from students.models import Contact
+from students.models import Student
 
 
 class StudentForm(forms.ModelForm):
