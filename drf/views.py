@@ -1,3 +1,4 @@
+# flake8: noqa
 from django.shortcuts import get_object_or_404
 from rest_framework import viewsets, generics
 from drf.serializers import StudentSerializer, GroupSerializer, TeacherSerializer, StudentDetailSerializer, \
