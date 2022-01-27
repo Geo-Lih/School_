@@ -1,5 +1,6 @@
 from django import forms
 
+from students.models import Contact
 from students.models import Student
 
 
@@ -19,4 +20,16 @@ class StudentForm(forms.ModelForm):
             'first_name',
             'last_name',
             'age',
+            'phone',
+        )
+
+
+class ContactForm(forms.ModelForm):
+
+    class Meta:
+        model = Contact
+        fields = (
+            'name',
+            'email',
+            'message',
         )

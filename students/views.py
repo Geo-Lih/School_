@@ -9,10 +9,14 @@ from faker import Faker
 
 from students.forms import StudentForm
 from students.models import Student
+from students.tasks import delete_log
 
 
 def get_students(request):
     queryset = Student.objects.all()
+
+    delete_log.delay()
+
     return render(request, 'students/index.html',
                   context={'students': queryset})
 
@@ -57,6 +61,7 @@ def create_students(request):
             'first_name': fake.first_name(),
             'last_name': fake.last_name(),
             'age': random.randint(5, 18),
+            'phone': '+380967195593',
         }
 
         form = StudentForm(initial=data)
