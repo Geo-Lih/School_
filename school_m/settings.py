@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'teacher',
     'group',
     'django_celery_results',
+    'rest_framework',
+    'drf',
 ]
 
 MIDDLEWARE = [
@@ -151,4 +153,8 @@ CELERY_BEAT_SCHEDULE = {
             month_of_year='*'
         ),
     },
+}
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10
 }
